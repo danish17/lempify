@@ -1,4 +1,13 @@
 #! /bin/bash
-. src/prettify.sh
+PROJECT_ROOT=$(pwd)
 
-bootstrap()
+# IMPORTS
+. "src/welcome.sh"
+. "src/messages.sh"
+. "src/bootstrap.sh"
+. "src/validator.sh"
+. "src/cleanup.sh"
+
+welcome
+bootstrap
+validate
