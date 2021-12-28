@@ -6,8 +6,12 @@ PROJECT_ROOT=$(pwd)
 . "src/messages.sh"
 . "src/bootstrap.sh"
 . "src/validator.sh"
+. "src/installer.sh"
 . "src/cleanup.sh"
+. "src/nginx-scripts/setup-default-site.sh"
 
 welcome
 bootstrap
 validate
+install
+setup_site

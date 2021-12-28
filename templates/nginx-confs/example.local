@@ -1,0 +1,22 @@
+server {
+		listen 80;
+
+        root /var/www/html/example.local;
+        index index.html index.php index.htm index.nginx-debian.html;
+
+        server_name example.local www.example.local;
+
+        location / {
+                try_files $uri $uri/ /index.php?$args;
+        }
+
+        location ~ \.php$ {
+                fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+                include        fastcgi_params;
+                fastcgi_buffer_size 128k;
+                fastcgi_buffers 256 4k;
+                fastcgi_busy_buffers_size 256k;
+                fastcgi_temp_file_write_size 256k;
+                fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+        }
+}
