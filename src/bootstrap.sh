@@ -8,6 +8,14 @@
 # bootstraps the project
 ###
 function bootstrap() {
+	step 'Checking permissions...'
+	if [ "$EUID" -ne 0 ] ; then 
+		error "Please run the script as root."
+  		exit 1
+	else
+		success "Permissions OK."
+	fi
+
 	step 'Creating Logfile...'
 	filename="run-$(date +%s).log" # needs a better logic to create a unique filename; currently will create a new file everytime the script is run"
 	echo '' > "$PROJECT_ROOT/logs/$filename"

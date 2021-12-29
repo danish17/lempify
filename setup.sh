@@ -14,4 +14,8 @@ welcome
 bootstrap
 validate
 install
-setup_site
+if [ $? -eq 0 ]; then
+	setup_site
+else
+	warning "Installation has faced some errors. Please check the logs for more information."
+fi

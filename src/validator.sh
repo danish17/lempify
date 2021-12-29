@@ -12,6 +12,8 @@ function validate() {
         exit 1
     fi
 
+	check_ports
+
     check_nginx
     installation_info[IS_NGINX_INSTALLED]=$?
 
@@ -99,4 +101,16 @@ function check_php() {
         success "PHP not detected."
         return 0
     fi
+}
+
+check_ports() {
+	step "Checking port 80 availability..."
+	lsof -i:80 > /dev/null 2>&1
+	if [ $? -eq 0 ]; then
+		error "Port 80 is already in use. Please free the port and try again."
+		echo "[$(date)] - Port 80 is already in use." >> "$PROJECT_ROOT/logs/$filename" 2>&1
+		exit 1
+	else
+		success "Port 80 is free."
+	fi
 }

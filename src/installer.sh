@@ -7,9 +7,9 @@
 ##
 function install() {
 	HAS_ERRORS=0
-	if  [ ! $IS_NGINX_INSTALLED ] ; then
+	if  [ ${ installation_info[IS_NGINX_INSTALLED] } -eq 0 ] ; then
 		step "Installing Nginx..."
-		sudo apt-get install nginx -y
+		sudo apt-get install nginx -y >> /dev/null 2>&1
 		if [ $? -ne 0 ]; then
 			HAS_ERRORS=1
 			error "Failed to install Nginx."
@@ -19,9 +19,9 @@ function install() {
 		fi
 	fi
 
-	if [ ! $IS_PHP_INSTALLED ] ; then 
+	if [ ${ installation_info[IS_PHP_INSTALLED] } -eq 0 ] ; then 
 		step "Installing PHP..."
-		sudo apt-get install php-fpm php-cli php-mysql php-curl php-gd php-mcrypt php-imagick php-intl -y
+		sudo apt-get install php7.4-fpm php7.4-cli php7.4-mysql php7.4-curl -y >> /dev/null 2>&1
 		if [ $? -ne 0 ]; then
 			HAS_ERRORS=1
 			error "Failed to install PHP."
@@ -31,9 +31,9 @@ function install() {
 		fi
 	fi
 
-	if [ ! $IS_MYSQL_INSTALLED ] ; then
+	if [ ${ installation_info[IS_MYSQL_INSTALLED] } -eq 0 ] ; then
 		step "Installing MySQL..."
-		sudo apt-get install mysql-server -y
+		sudo apt-get install mysql-server -y >> /dev/null 2>&1
 		if [ $? -ne 0 ]; then
 			HAS_ERRORS=1
 			error "Failed to install MySQL."
@@ -43,5 +43,5 @@ function install() {
 		fi
 	fi
 
-	return HAS_ERRORS
+	return $HAS_ERRORS
 }
