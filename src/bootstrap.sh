@@ -18,7 +18,7 @@ function bootstrap() {
 
 	step 'Creating Logfile...'
 	filename="run-$(date +%s).log" # needs a better logic to create a unique filename; currently will create a new file everytime the script is run"
-	echo '' > "$PROJECT_ROOT/logs/$filename"
+	mkdir -p $PROJECT_ROOT/logs && echo '' > "$PROJECT_ROOT/logs/$filename"
 	if [ $? -eq 0 ]; then
 		success 'Logfile created.'
 	else

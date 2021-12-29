@@ -9,12 +9,14 @@ PROJECT_ROOT=$(pwd)
 . "src/installer.sh"
 . "src/cleanup.sh"
 . "src/nginx-scripts/setup-default-site.sh"
+. "src/nginx-scripts/service-status.sh"
 
 welcome
 bootstrap
 validate
 install
 if [ $? -eq 0 ]; then
+	maybe_run_nginx
 	setup_site
 else
 	warning "Installation has faced some errors. Please check the logs for more information."
