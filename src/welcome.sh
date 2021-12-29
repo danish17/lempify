@@ -12,5 +12,5 @@ function welcome() {
 |/__\|/__\|/__\|/__\|/__\|/__\|/__\|
  " "34m"
 
-	prettify "A simple bash script to setup LEMP stack\n\n" $BOLD
+	prettify "A simple bash script to setup LEMP stack with WordPress CLI\n\n" $BOLD
 }

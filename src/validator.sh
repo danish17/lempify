@@ -22,6 +22,9 @@ function validate() {
 
     check_mysql
     installation_info[IS_MYSQL_INSTALLED]=$?
+
+	check_wpcli
+	installation_info[IS_WPCLI_INSTALLED]=$?
 }
 
 ###
@@ -103,6 +106,27 @@ function check_php() {
     fi
 }
 
+###
+# check_wpcli()
+# checks if wpcli is installed
+# returns 0 if wpcli is not installed; 1 otherwise
+###
+check_wpcli() {
+	step "Checking WP-CLI..."
+	if [ -f /usr/local/bin/wp ]; then
+		warning "WP-CLI installation detected."
+		echo "[$(date)] - WP-CLI installation detected (/usr/local/bin/wp exists)." >> "$PROJECT_ROOT/logs/$filename" 2>&1
+		return 1
+	else
+		success "WP-CLI not detected."
+		return 0
+	fi
+}
+
+###
+# check_ports()
+# checks if port 80 is available
+###
 check_ports() {
 	step "Checking port 80 availability..."
 	lsof -i:80 > /dev/null 2>&1

@@ -43,5 +43,24 @@ function install() {
 		fi
 	fi
 
+	if [ ${ installation_info[IS_WPCLI_INSTALLED] } -eq 0 ] ; then
+		step "Installing WP-CLI..."
+		install_wpcli
+		if [ $? -ne 0 ]; then
+			HAS_ERRORS=1
+			error "Failed to install WP-CLI."
+			echo "[$(date)] - Failed to install WP-CLI." >> "$PROJECT_ROOT/logs/$filename" 2>&1
+		else
+			success "WP-CLI installed successfully."
+		fi
+	fi
+
 	return $HAS_ERRORS
+}
+
+function install_supp() {
+	apt install libwww-perl >> /dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		success "libwww-perl installed automatically."
+	fi
 }
