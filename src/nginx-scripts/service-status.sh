@@ -5,6 +5,7 @@
 # function to check service status
 ##
 function maybe_run_nginx() {
+	step "Checking Nginx Service Status..."
 	systemctl is-enabled --quiet nginx
 	if [ $? -eq 1 ]; then
 		success "Nginx is enabled."
