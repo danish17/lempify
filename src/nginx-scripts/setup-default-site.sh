@@ -48,7 +48,7 @@ function setup_site() {
 	# !END BLOCK!
 
 	step "Testing Nginx configuration"
-	nginx -t
+	nginx -t >> /dev/null
 	if [ $? -eq 0 ]; then
 		success "Nginx configuration test passed."
 	else
