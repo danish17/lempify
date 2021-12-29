@@ -7,7 +7,7 @@
 ##
 function install() {
 	HAS_ERRORS=0
-	if  [ ${ installation_info[IS_NGINX_INSTALLED] } -eq 0 ] ; then
+	if  [ ${installation_info[IS_NGINX_INSTALLED]} -eq 0 ] ; then
 		step "Installing Nginx..."
 		sudo apt-get install nginx -y >> /dev/null 2>&1
 		if [ $? -ne 0 ]; then
@@ -19,7 +19,7 @@ function install() {
 		fi
 	fi
 
-	if [ ${ installation_info[IS_PHP_INSTALLED] } -eq 0 ] ; then 
+	if [ ${installation_info[IS_PHP_INSTALLED]} -eq 0 ] ; then 
 		step "Installing PHP..."
 		sudo apt-get install php7.4-fpm php7.4-cli php7.4-mysql php7.4-curl -y >> /dev/null 2>&1
 		if [ $? -ne 0 ]; then
@@ -31,7 +31,7 @@ function install() {
 		fi
 	fi
 
-	if [ ${ installation_info[IS_MYSQL_INSTALLED] } -eq 0 ] ; then
+	if [ ${installation_info[IS_MYSQL_INSTALLED]} -eq 0 ] ; then
 		step "Installing MySQL..."
 		sudo apt-get install mysql-server -y >> /dev/null 2>&1
 		if [ $? -ne 0 ]; then
@@ -43,7 +43,7 @@ function install() {
 		fi
 	fi
 
-	if [ ${ installation_info[IS_WPCLI_INSTALLED] } -eq 0 ] ; then
+	if [ ${installation_info[IS_WPCLI_INSTALLED]} -eq 0 ] ; then
 		step "Installing WP-CLI..."
 		install_wpcli
 		if [ $? -ne 0 ]; then
